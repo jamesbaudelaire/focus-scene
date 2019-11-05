@@ -39,7 +39,7 @@ a{
 const App = () => {
   const [load, setLoad] = useState(true);
 
-  const [info, setInfo] = useState(true);
+  const [info, setInfo] = useState(false);
 
   const toggle = () => {
     setInfo(false);
@@ -52,13 +52,14 @@ const App = () => {
 
     setTimeout(() => {
       setLoad(false);
+      setInfo(true);
     }, 1000);
   }, []);
 
   return (
     <>
       <GS />
-      {/* {load && <Loading />} */}
+      {load && <Loading />}
 
       {info ? (
         <Info toggle={toggle} />

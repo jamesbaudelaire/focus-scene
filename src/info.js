@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
+import { LazyLoad } from "./functions/lazyload";
+
 const S = styled.div`
   position: absolute;
   top: 0;
@@ -26,19 +28,22 @@ const S = styled.div`
   }
 
   .info {
-    background: red;
     overflow-y: hidden;
     overflow-x: scroll;
     white-space: nowrap;
-    margin-top: 50px;
-    height: calc(100% - 100px);
+    margin-top: 40px;
+    height: calc(100% - 60px);
 
     div {
-      margin: 10px;
+      margin: 20px;
       display: inline-block;
       margin-bottom: 20px;
-      height: calc(100% - 20px);
-      width: calc(100% - 20px);
+      margin-right: -20px;
+      :last-child {
+        margin-right: 20px;
+      }
+      height: calc(100% - 40px);
+      width: calc(100% - 60px);
       background: black;
 
       opacity: 0.5;
@@ -58,6 +63,10 @@ export const Info = ({ toggle }) => {
 
   useEffect(() => {
     setLoad(true);
+
+    let targets = document.querySelectorAll("div");
+
+    targets.forEach(LazyLoad);
   }, []);
 
   return (

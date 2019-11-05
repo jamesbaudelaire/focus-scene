@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { LazyLoad } from "../functions/lazyload";
 
 const S = styled.div`
   padding-top: 5px;
@@ -36,29 +37,7 @@ export const Home = () => {
     setLoad(true);
 
     let targets = document.querySelectorAll("div");
-
-    const lazyLoad = tar => {
-      let options = {
-        root: null,
-        rootMargin: "0px",
-        threshold: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
-      };
-
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          let el = entry.target;
-          if (entry.intersectionRatio > 0.5) {
-            el.classList.add("io");
-          } else {
-            el.classList.remove("io");
-          }
-        });
-      }, options);
-
-      io.observe(tar);
-    };
-
-    targets.forEach(lazyLoad);
+    targets.forEach(LazyLoad);
   }, []);
 
   return (
