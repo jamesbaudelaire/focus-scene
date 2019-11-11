@@ -4,8 +4,9 @@ import styled from "styled-components";
 
 const S = styled.div`
   border-radius: 30px 30px 0 0;
+  z-index: 100;
   font-family: var(--font2);
-  background: black;
+  background: var(--theme1);
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -14,12 +15,10 @@ const S = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   text-align: center;
 
-  opacity: 0;
-  transition: 1s;
-  transform: translatey(30px);
+  transition: 0.5s;
+  transform: translatey(50px);
 
   &.load {
-    opacity: 1;
     transform: translatey(0);
   }
 
@@ -29,7 +28,7 @@ const S = styled.div`
     font-size: 12px;
     i {
       display: block;
-      font-size: 30px;
+      font-size: 24px;
       margin-bottom: 5px;
     }
   }
@@ -39,7 +38,7 @@ const S = styled.div`
   }
 
   .active * {
-    color: red;
+    color: var(--theme2);
   }
 `;
 
@@ -47,17 +46,17 @@ let pages = [
   {
     name: "scenes",
     location: "/",
-    icon: "search"
+    icon: "image_search"
   },
   {
-    name: "collection",
+    name: "bookmarks",
     location: "/saved",
-    icon: "favorite"
+    icon: "collections"
   },
   {
     name: "profile",
     location: "/profile",
-    icon: "account_circle"
+    icon: "portrait"
   }
 ];
 

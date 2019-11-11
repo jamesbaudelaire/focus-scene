@@ -7,12 +7,12 @@ const S = styled.div`
   top: 0;
   height: 100%;
   width: 100%;
-  z-index: 100;
+  z-index: 300;
   background: white;
   img {
     opacity: 0;
     transition: 0.5s;
-    width: 240px;
+    width: 200px;
     display: block;
     margin: auto;
     top: 0;
@@ -40,7 +40,7 @@ export const Loading = () => {
       <img
         className={load ? "load" : undefined}
         alt="logo"
-        src="https://res.cloudinary.com/baudelaire/image/upload/v1572818720/focus-scene/logo.png"
+        src="https://res.cloudinary.com/baudelaire/image/upload/v1573018107/focus-scene/logo.png"
       />
     </S>
   );
