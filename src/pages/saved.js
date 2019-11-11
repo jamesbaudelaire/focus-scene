@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { LazyLoad } from "../functions/lazyload";
+import { LazyLoad } from "../functions/lazyLoad";
 
 const S = styled.div`
   padding-top: 5px;
@@ -30,7 +30,7 @@ export const Saved = () => {
 
   return (
     <S>
-      {[...Array(10)].map((x, i) => (
+      {[...Array(5)].map((x, i) => (
         <div key={i} />
       ))}
     </S>

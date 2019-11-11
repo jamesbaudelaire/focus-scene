@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import { LazyLoad } from "./functions/lazyload";
+import { LazyLoad } from "./functions/lazyLoad";
 
 const S = styled.div`
   position: absolute;
@@ -34,29 +34,78 @@ const S = styled.div`
     margin-top: 40px;
     height: calc(100% - 60px);
 
-    div {
+    .card {
+      background-size: cover;
+      background-color: grey;
+      max-height: 600px;
+      border-radius: 30px;
+      color: grey;
+      font-weight: bold;
+      overflow: hidden;
       margin: 20px;
       display: inline-block;
-      margin-bottom: 20px;
-      margin-right: -20px;
+      margin-right: -10px;
       :last-child {
         margin-right: 20px;
       }
-      height: calc(100% - 40px);
+      height: calc(100% - 60px);
       width: calc(100% - 60px);
-      background: black;
 
       opacity: 0.5;
       transition: 0.5s;
       transform: scale(0.9);
       &.io {
-        opacity: 0.5;
-        background: black;
+        opacity: 1;
         transform: scale(1);
+        box-shadow: var(--shadow);
       }
+    }
+
+    .overlay {
+      background: white;
+      opacity: 0.75;
+      height: 100%;
+      border-radius: 30px;
+    }
+
+    .title {
+      text-transform: uppercase;
+      position: absolute;
+      left: 0;
+      text-align: left;
+      font-size: 25px;
+      width: calc(100% - 40px);
+      white-space: pre-wrap;
+      margin: 20px;
+    }
+    .text {
+      font-size: 20px;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin: 20px;
+      white-space: pre-wrap;
+      text-align: right;
+      font-family: var(--font2);
     }
   }
 `;
+
+// let text = [
+//   {
+//     title:
+//       "Focus Scene is THE marketplace to find your next scene or become a host."
+//   },
+//   {
+//     title: "Photographers",
+//     text:
+//       "find unique locations in your area and connect with other shutterbugs"
+//   },
+//   {
+//     title: "Hosts",
+//     text: "profit by sharing your space"
+//   }
+// ];
 
 export const Info = ({ toggle }) => {
   const [load, setLoad] = useState(false);
@@ -76,9 +125,44 @@ export const Info = ({ toggle }) => {
       </i>
 
       <div className="info">
-        {[...Array(3)].map((x, i) => (
-          <div key={i} />
-        ))}
+        <div
+          className="card"
+          style={{
+            backgroundImage: `url('https://source.unsplash.com/400x800/?scene,1')`
+          }}
+        >
+          <div className="overlay">
+            <div className="title">
+              Connect <div style={{ color: "var(--theme2)" }}>Venue Owners</div>{" "}
+              to <div style={{ color: "var(--theme1)" }}>Photographers</div>
+            </div>
+            <div className="text">stuff</div>
+          </div>
+        </div>
+
+        <div
+          className="card"
+          style={{
+            backgroundImage: `url('https://source.unsplash.com/400x800/?scene,2')`
+          }}
+        >
+          <div className="overlay">
+            <div className="title">Connect Venue Owners with</div>
+            <div className="text">stuff</div>
+          </div>
+        </div>
+
+        <div
+          className="card"
+          style={{
+            backgroundImage: `url('https://source.unsplash.com/400x800/?scene,3')`
+          }}
+        >
+          <div className="overlay">
+            <div className="title">Connect Venue Owners with</div>
+            <div className="text">stuff</div>
+          </div>
+        </div>
       </div>
     </S>
   );
