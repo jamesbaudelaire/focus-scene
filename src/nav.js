@@ -8,9 +8,9 @@ const S = styled.div`
   font-family: var(--font2);
   background: var(--theme1);
   position: fixed;
-  bottom: 0;
   width: 100%;
   left: 0;
+  bottom: 0;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   text-align: center;

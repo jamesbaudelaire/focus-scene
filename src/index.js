@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { createGlobalStyle } from "styled-components";
-import { BrowserRouter, Route, history } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import { Loading } from "./loading";
 import { Home } from "./pages/home";
 import { Saved } from "./pages/saved";
 import { Profile } from "./pages/profile";
 import { Nav } from "./nav";
 import { Info } from "./info";
-import { Scene } from "./scene";
 
 const GS = createGlobalStyle`
 @import url("https://fonts.googleapis.com/css?family=Montserrat|Roboto");
@@ -25,6 +24,9 @@ const GS = createGlobalStyle`
 
 
 body{
+  margin:0;
+  padding:0;
+  overscroll-behavior: contain;
   font-family:var(--font1);
   user-select:none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -78,17 +80,22 @@ const App = () => {
     setScene(x);
   };
 
+  const close = () => {
+    setScene(null);
+  };
+
   useEffect(() => {
     let search = window.location.search.substring(1);
     let filterdScenes = scenes.map(x => x.name);
     if (filterdScenes.includes(search)) {
       setScene(search);
-    }
-
-    setTimeout(() => {
       setLoad(false);
-      setInfo(true);
-    }, 1500);
+    } else {
+      setTimeout(() => {
+        setLoad(false);
+        setInfo(true);
+      }, 1800);
+    }
   }, []);
 
   return (
@@ -96,31 +103,28 @@ const App = () => {
       <GS />
       {load && <Loading />}
 
-      {info ? (
+      {info && scene == null ? (
         <Info toggle={toggle} />
       ) : (
         <BrowserRouter>
+          <Route path="/profile" component={Profile} />
+          <Route path="/saved" component={Saved} />
           <Route
             exact
             path="/"
-            render={props => <Home search={searchScene} scenes={scenes} />}
+            render={props => (
+              <Home
+                search={searchScene}
+                scene={scene}
+                scenes={scenes}
+                close={close}
+              />
+            )}
           />
-          <Route path="/profile" component={Profile} />
-          <Route path="/saved" component={Saved} />
-
           <div className="spacer" />
-
-          {scene !== null ? (
-            <Scene scene={scene} close={searchScene} />
-          ) : (
-            undefined
-          )}
-
           <Nav />
         </BrowserRouter>
       )}
-
-      {}
     </>
   );
 };

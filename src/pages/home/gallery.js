@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import { LazyLoad } from "./functions/lazyLoad";
+import { LazyLoad } from "../../functions/lazyLoad";
 
 const S = styled.div`
   opacity: 0;

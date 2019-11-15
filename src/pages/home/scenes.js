@@ -7,10 +7,8 @@ const S = styled.div`
     i {
       font-size: 20px;
     }
-    margin: 20px 10px;
-    margin-bottom: 10px;
-    width: calc(100% - 20px);
-
+    margin: 20px;
+    width: calc(100% - 40px);
     opacity: 0;
     transition: 0.5s;
     transform: scale(0.8);
