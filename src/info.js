@@ -49,7 +49,7 @@ const S = styled.div`
         margin-right: 20px;
       }
       height: calc(100% - 60px);
-      width: calc(100% - 60px);
+      width: calc(100% - 80px);
 
       opacity: 0.5;
       transition: 0.5s;
@@ -90,22 +90,6 @@ const S = styled.div`
     }
   }
 `;
-
-// let text = [
-//   {
-//     title:
-//       "Focus Scene is THE marketplace to find your next scene or become a host."
-//   },
-//   {
-//     title: "Photographers",
-//     text:
-//       "find unique locations in your area and connect with other shutterbugs"
-//   },
-//   {
-//     title: "Hosts",
-//     text: "profit by sharing your space"
-//   }
-// ];
 
 export const Info = ({ toggle }) => {
   const [load, setLoad] = useState(false);

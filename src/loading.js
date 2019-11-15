@@ -28,20 +28,23 @@ const S = styled.div`
   }
 `;
 
+let url =
+  "https://res.cloudinary.com/baudelaire/image/upload/v1573018107/focus-scene/logo.png";
+
 export const Loading = () => {
   const [load, setLoad] = useState(false);
 
   useEffect(() => {
-    setLoad(true);
+    let logo = new Image();
+    logo.src = url;
+    logo.onload = () => {
+      setLoad(true);
+    };
   }, []);
 
   return (
     <S>
-      <img
-        className={load ? "load" : undefined}
-        alt="logo"
-        src="https://res.cloudinary.com/baudelaire/image/upload/v1573018107/focus-scene/logo.png"
-      />
+      <img className={load ? "load" : undefined} alt="logo" src={url} />
     </S>
   );
 };

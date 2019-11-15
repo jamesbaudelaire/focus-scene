@@ -9,7 +9,7 @@ const S = styled.div`
   background: var(--theme2);
   position: fixed;
   bottom: 0;
-  padding-bottom: 50px;
+  padding-bottom: 52px;
   width: 100%;
   left: 0;
   white-space: nowrap;
@@ -23,7 +23,7 @@ const S = styled.div`
 
   div {
     color: white;
-    margin: 10px 0 20px 30px;
+    margin: 9px 0 20px 30px;
     display: inline-block;
     font-size: 12px;
     text-transform: uppercase;
@@ -34,8 +34,9 @@ const S = styled.div`
     }
     transition: 0.5s;
     &.selected {
-      background: white;
-      color: var(--theme2);
+      background: var(--theme1);
+      color: white;
+      box-shadow: var(--shadow);
     }
   }
 
@@ -70,7 +71,7 @@ export const FilterNav = () => {
       {types.map(x => (
         <div
           key={x}
-          className={x == type ? "selected" : undefined}
+          className={x == type ? "selected" : ""}
           onClick={() => {
             setType(x);
           }}
