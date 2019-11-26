@@ -9,7 +9,7 @@ const S = styled.div`
     }
     margin: 20px;
     width: calc(100% - 40px);
-    opacity: 0;
+    opacity: 0.5;
     transition: 0.5s;
     transform: scale(0.8);
     &.io {
@@ -29,16 +29,29 @@ const S = styled.div`
         transform: scale(0.9);
       }
     }
-
+    .price {
+      box-shadow: var(--shadow);
+      position: absolute;
+      bottom: 120px;
+      right: 20px;
+      background: white;
+      padding: 5px 10px;
+      border-radius: 30px;
+    }
+    .scene-type {
+      margin: 10px 0;
+      font-family: var(--font1);
+      font-style: italic;
+    }
     .info {
       position: relative;
       bottom: 0;
-      margin: 10px 20px;
+      margin: 20px;
       width: 50%;
     }
     .five-stars {
       position: absolute;
-      top: 24px;
+      bottom: 0px;
       z-index: -1;
       color: black;
     }
@@ -65,14 +78,19 @@ export const Scenes = ({ search, scenes }) => {
           <div
             className="img"
             style={{
-              backgroundImage: `url('https://source.unsplash.com/300x200/?room,${i}')`
+              backgroundImage: `url('https://res.cloudinary.com/baudelaire/image/upload/w_500/v1574746635/focus-scene/scenes/${
+                scenes[i].url
+              }.png')`
             }}
             onClick={() => {
               search(scenes[i].name);
             }}
           />
+          <div className="price">{scenes[i].price}</div>
           <div className="info">
             <div className="name">{scenes[i].name}</div>
+            <div className="scene-type">{scenes[i].type}</div>
+
             <div className="stars">
               {[...Array(scenes[i].stars)].map((s, i) => (
                 <i key={i} className="material-icons-round">

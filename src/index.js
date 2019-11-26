@@ -30,6 +30,7 @@ body{
   font-family:var(--font1);
   user-select:none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  color: rgb(100, 100, 100);
 }
 
 a{
@@ -45,23 +46,43 @@ a{
 let scenes = [
   {
     img: "",
-    name: "scene-1",
-    stars: 5
+    name: "Anne Marie Studios",
+    url: "ann-marie-studios",
+    type: "Studio",
+    stars: 5,
+    price: "$$/hr"
   },
   {
     img: "",
-    name: "scene-2",
-    stars: 4
+    name: "Fort Smith Coffee Co.",
+    url: "fort-smith-coffee-co",
+    type: "Business",
+    stars: 4,
+    price: "FREE"
   },
   {
     img: "",
-    name: "scene-3",
-    stars: 3
+    name: "The Johnsons",
+    url: "the-johnsons",
+    type: "Home",
+    stars: 5,
+    price: "$$/hr"
   },
   {
     img: "",
-    name: "scene-4",
-    stars: 4
+    name: "Kindred Barn",
+    url: "kindred-barn",
+    type: "Barn",
+    stars: 4,
+    price: "$$$/hr"
+  },
+  {
+    img: "",
+    name: "Camille Walala",
+    url: "camille-walala",
+    type: "Mural",
+    stars: 5,
+    price: "FREE"
   }
 ];
 
@@ -86,7 +107,7 @@ const App = () => {
 
   useEffect(() => {
     let search = window.location.search.substring(1);
-    let filterdScenes = scenes.map(x => x.name);
+    let filterdScenes = scenes.map(x => x.url);
     if (filterdScenes.includes(search)) {
       setScene(search);
       setLoad(false);

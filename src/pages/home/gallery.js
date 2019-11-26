@@ -15,7 +15,7 @@ const S = styled.div`
 
   .gallery {
     white-space: nowrap;
-    height: 300px;
+    height: 260px;
     overflow-x: scroll;
   }
 
@@ -30,7 +30,7 @@ const S = styled.div`
     :last-child {
       margin-right: 20px;
     }
-    height: calc(100% - 100px);
+    height: calc(100% - 60px);
     width: calc(100% - 60px);
 
     opacity: 0.5;
@@ -63,7 +63,8 @@ export const Gallery = ({ toggle }) => {
             className="card"
             key={i}
             style={{
-              backgroundImage: `url('https://source.unsplash.com/300x200/?room,${i}')`
+              backgroundImage: `url('https://res.cloudinary.com/baudelaire/image/upload/v1574749615/focus-scene/scenes/ann-marie-studios/${i +
+                1}.jpg')`
             }}
           />
         ))}

@@ -19,7 +19,7 @@ const S = styled.div`
   text-align: center;
 
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 
   div {
     color: white;
@@ -70,6 +70,16 @@ export const SceneNav = ({ close, scene }) => {
         <i className="material-icons-round back">arrow_back_ios</i>
         back
       </div>
+
+      <div
+        onClick={() => {
+          console.log("l");
+        }}
+      >
+        <i className="material-icons save">location_on</i>
+        lcoation
+      </div>
+
       <div
         onClick={() => {
           share();

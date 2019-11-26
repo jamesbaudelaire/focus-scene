@@ -12,7 +12,7 @@ const S = styled.div`
   img {
     opacity: 0;
     transition: 0.5s;
-    width: 200px;
+    width: 150px;
     display: block;
     margin: auto;
     top: 0;
@@ -29,7 +29,7 @@ const S = styled.div`
 `;
 
 let url =
-  "https://res.cloudinary.com/baudelaire/image/upload/v1573018107/focus-scene/logo.png";
+  "https://res.cloudinary.com/baudelaire/image/upload/v1574747384/focus-scene/logo.png";
 
 export const Loading = () => {
   const [load, setLoad] = useState(false);
