@@ -31,25 +31,24 @@ const S = styled.div`
     overflow-y: hidden;
     overflow-x: scroll;
     white-space: nowrap;
-    margin-top: 40px;
-    height: calc(100% - 60px);
+    margin-top: 30px;
+    height: calc(100% - 40px);
 
     .card {
       background-size: cover;
       background-color: grey;
-      max-height: 600px;
       border-radius: 30px;
       color: grey;
       font-weight: bold;
       overflow: hidden;
-      margin: 20px;
+      margin: 30px;
       display: inline-block;
-      margin-right: -10px;
+      margin-right: 0px;
       :last-child {
-        margin-right: 20px;
+        margin-right: 30px;
       }
       height: calc(100% - 60px);
-      width: calc(100% - 80px);
+      width: calc(100% - 70px);
 
       opacity: 0.5;
       transition: 0.5s;
@@ -63,30 +62,43 @@ const S = styled.div`
 
     .overlay {
       background: white;
-      opacity: 0.75;
+      opacity: 0.8;
       height: 100%;
       border-radius: 30px;
+      position: absolute;
+      width: 100%;
     }
 
     .title {
+      font-weight: bold;
       text-transform: uppercase;
-      position: absolute;
-      left: 0;
-      text-align: left;
-      font-size: 25px;
-      width: calc(100% - 40px);
+      font-size: 7vw;
       white-space: pre-wrap;
-      margin: 20px;
-    }
-    .text {
-      font-size: 20px;
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      margin: 20px;
-      white-space: pre-wrap;
-      text-align: right;
       font-family: var(--font2);
+      position: absolute;
+      bottom: 50%;
+      padding: 40px;
+      height: 140px;
+    }
+
+    hr {
+      height: 3px;
+      border-radius: 30px;
+      width: 70%;
+      left: 0;
+      right: 0;
+      position: absolute;
+      top: calc(50% - 3px);
+    }
+
+    .text {
+      line-height: 25px;
+      font-size: 1rem;
+      white-space: pre-wrap;
+      font-family: var(--font1);
+      position: absolute;
+      top: 50%;
+      padding: 40px;
     }
   }
 `;
@@ -117,10 +129,14 @@ export const Info = ({ toggle }) => {
         >
           <div className="overlay">
             <div className="title">
-              Connect <div style={{ color: "var(--theme2)" }}>Venue Owners</div>{" "}
-              to <div style={{ color: "var(--theme1)" }}>Photographers</div>
+              Connect <div style={{ color: "var(--theme2)" }}>Venue Owners</div>
+              to <div style={{ color: "var(--theme1)" }}>Photographers.</div>
             </div>
-            <div className="text">stuff</div>
+            <hr />
+            <div className="text">
+              Focus Scene is a marketplace that provides a collection of unique,
+              undiscovered locations for your next photoshoot.
+            </div>
           </div>
         </div>
 
@@ -131,8 +147,16 @@ export const Info = ({ toggle }) => {
           }}
         >
           <div className="overlay">
-            <div className="title">Connect Venue Owners with</div>
-            <div className="text">stuff</div>
+            <div className="center">
+              <div className="title">
+                MAKE ANY SPACE YOUR LOCATION SETTING FOR PHOTOSHOOTS.
+              </div>
+              <hr />
+              <div className="text">
+                Become a verified venue owner on this app to lend your location
+                for easy revenue, advertising, and networking.
+              </div>
+            </div>
           </div>
         </div>
 
@@ -143,8 +167,14 @@ export const Info = ({ toggle }) => {
           }}
         >
           <div className="overlay">
-            <div className="title">Connect Venue Owners with</div>
-            <div className="text">stuff</div>
+            <div className="center">
+              <div className="title">END YOUR SEARCH BY BEGINNING HERE.</div>
+              <hr />
+              <div className="text">
+                Find attractive locations near you to shoot photography and
+                personalize your favorites to easily share with others.{" "}
+              </div>
+            </div>
           </div>
         </div>
       </div>
