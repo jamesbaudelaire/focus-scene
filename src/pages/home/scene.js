@@ -35,7 +35,7 @@ const S = styled.div`
   .scene-page {
     font-family: var(--font2);
     font-size: 25px;
-    margin: 0 20px 10px 20px;
+    margin: 0 20px 0px 20px;
   }
   .scene-type {
     font-style: italic;
@@ -50,6 +50,17 @@ const S = styled.div`
     i {
       font-size: 30px;
       color: red;
+    }
+  }
+
+  .about,
+  .contact {
+    margin: 20px;
+    .about-title,
+    .contact-title {
+      margin: 30px 0 10px 0;
+      font-weight: bold;
+      font-family: var(--font2);
     }
   }
 `;
@@ -76,6 +87,10 @@ export const Scene = ({ scene, close }) => {
         />
         <span className="name">{user.name}</span>
         <br />
+
+        <span className="user-type" style={{ background: "var(--theme1)" }}>
+          photographer
+        </span>
         <span className="user-type" style={{ background: "var(--theme2)" }}>
           venue owner
         </span>
@@ -86,6 +101,22 @@ export const Scene = ({ scene, close }) => {
       <div className="scene-type">Studio</div>
 
       <div className="scene-location">523 Towson Ave, Fort Smith, Arkansas</div>
+
+      <div className="about">
+        <div className="about-title">About the location</div>
+        This space is an endless opportunity for photos, making your vision come
+        to reality.
+      </div>
+
+      <div className="contact">
+        <div className="contact-title">Contact</div>
+        <a
+          style={{ color: "var(--theme3)" }}
+          href="https://www.annemariesstudio.com/"
+        >
+          https://www.annemariesstudio.com/
+        </a>
+      </div>
 
       <SceneNav scene={scene} close={close} />
     </S>

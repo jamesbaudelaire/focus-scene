@@ -77,7 +77,7 @@ export const SceneNav = ({ close, scene }) => {
         }}
       >
         <i className="material-icons save">location_on</i>
-        lcoation
+        location
       </div>
 
       <div
