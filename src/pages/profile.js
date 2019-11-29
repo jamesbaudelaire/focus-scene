@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 
 const S = styled.div`
   opacity: 0;
@@ -13,7 +14,7 @@ const S = styled.div`
     img {
       border-radius: 50%;
       width: 80px;
-      height:80px
+      height: 80px;
       box-shadow: var(--shadow);
     }
     .name {
@@ -59,6 +60,15 @@ const S = styled.div`
       font-family: var(--font1);
     }
   }
+
+  .dark-mode {
+    font-size: 40px;
+    color: ${props => (props.dark ? "white" : "black")};
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 20px;
+  }
 `;
 
 let user = {
@@ -71,20 +81,23 @@ let settings = {
   hosting: ["Learn about hosting", "List your space"],
   "referrals & credits": ["Invite friends", "Refer a host"],
   tools: ["Siri shortcuts"],
-  support: ["Get help", "Give use feedback"],
+  support: ["Get help", "Give us feedback"],
   legal: ["Terms of service"],
   "log out": []
 };
 
 export const Profile = () => {
   const [load, setLoad] = useState(false);
+  const dark = useSelector(state => state.dark);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setLoad(true);
+    window.scrollTo(0, 0);
   }, []);
 
   return (
-    <S className={load ? "load" : undefined}>
+    <S dark={dark} className={load ? "load" : undefined}>
       <div className="user">
         <img
           alt="user"
@@ -104,16 +117,23 @@ export const Profile = () => {
 
       <div className="settings">
         {Object.keys(settings).map(x => (
-          <div>
+          <div key={x}>
             <div className="setting">{x}</div>
             {settings[x].map(option => (
-              <div>
+              <div key={option}>
                 <div className="option">{option}</div>
                 <hr />
               </div>
             ))}
           </div>
         ))}
+
+        <i
+          onClick={() => dispatch({ type: "dark" })}
+          className="material-icons-round dark-mode"
+        >
+          brightness_6
+        </i>
       </div>
     </S>
   );

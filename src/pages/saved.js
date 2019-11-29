@@ -26,6 +26,7 @@ export const Saved = () => {
   useEffect(() => {
     let targets = document.querySelectorAll("div");
     targets.forEach(LazyLoad);
+    window.scrollTo(0, 0);
   }, []);
 
   return (

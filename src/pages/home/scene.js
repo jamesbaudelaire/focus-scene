@@ -5,6 +5,9 @@ import { Gallery } from "./gallery";
 
 import styled from "styled-components";
 
+import { useSelector } from "react-redux";
+import { data } from "../../data";
+
 const S = styled.div`
   .user {
     margin: 20px;
@@ -65,27 +68,25 @@ const S = styled.div`
   }
 `;
 
-let user = {
-  name: "Anne Marie",
-  type: {
-    "venue-owner": true,
-    photographer: false
-  }
-};
+export const Scene = () => {
+  const s = useSelector(state => state.scene);
+  console.log(s);
 
-export const Scene = ({ scene, close }) => {
-  console.log(scene);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
+
   return (
     <S className="scene-page">
-      <Gallery />
+      <Gallery scene={s} />
 
-      <div className="user">
+      {/* <div className="user">
         <img
           alt="user"
           className="user-img"
           src="https://res.cloudinary.com/baudelaire/image/upload/v1574749092/focus-scene/user.png"
         />
-        <span className="name">{user.name}</span>
+        <span className="name">Anne Marie</span>
         <br />
 
         <span className="user-type" style={{ background: "var(--theme1)" }}>
@@ -94,21 +95,18 @@ export const Scene = ({ scene, close }) => {
         <span className="user-type" style={{ background: "var(--theme2)" }}>
           venue owner
         </span>
-      </div>
+      </div> */}
 
-      <div className="scene-page">Anne Marie Studios</div>
+      <div className="scene-page">{data[s].name}</div>
 
-      <div className="scene-type">Studio</div>
-
-      <div className="scene-location">523 Towson Ave, Fort Smith, Arkansas</div>
+      <div className="scene-type">{data[s].type}</div>
 
       <div className="about">
         <div className="about-title">About the location</div>
-        This space is an endless opportunity for photos, making your vision come
-        to reality.
+        {data[s].about}
       </div>
 
-      <div className="contact">
+      {/* <div className="contact">
         <div className="contact-title">Contact</div>
         <a
           style={{ color: "var(--theme3)" }}
@@ -116,9 +114,9 @@ export const Scene = ({ scene, close }) => {
         >
           https://www.annemariesstudio.com/
         </a>
-      </div>
+      </div> */}
 
-      <SceneNav scene={scene} close={close} />
+      <SceneNav />
     </S>
   );
 };

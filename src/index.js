@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, css } from "styled-components";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Loading } from "./loading";
 import { Home } from "./pages/home";
@@ -8,6 +8,16 @@ import { Saved } from "./pages/saved";
 import { Profile } from "./pages/profile";
 import { Nav } from "./nav";
 import { Info } from "./info";
+import { data } from "./data";
+
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+
+import { Reducers } from "./redux/reducers";
+import { useSelector, useDispatch } from "react-redux";
+import { scene } from "./redux/actions";
+
+const store = createStore(Reducers);
 
 const GS = createGlobalStyle`
 @import url("https://fonts.googleapis.com/css?family=Montserrat|Roboto");
@@ -24,13 +34,20 @@ const GS = createGlobalStyle`
 
 
 body{
+  color: rgb(100, 100, 100);
+  ${props =>
+    props.dark &&
+    css`
+      background: rgb(30, 30, 30);
+      color: rgb(200, 200, 200);
+    `};
+  transition:.5s;
   margin:0;
   padding:0;
   overscroll-behavior: contain;
   font-family:var(--font1);
   user-select:none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  color: rgb(100, 100, 100);
 }
 
 a{
@@ -43,105 +60,49 @@ a{
 
 `;
 
-let scenes = [
-  {
-    img: "",
-    name: "Anne Marie Studios",
-    url: "ann-marie-studios",
-    type: "Studio",
-    stars: 5,
-    price: "$$/hr"
-  },
-  {
-    img: "",
-    name: "Fort Smith Coffee Co.",
-    url: "fort-smith-coffee-co",
-    type: "Business",
-    stars: 4,
-    price: "FREE"
-  },
-  {
-    img: "",
-    name: "The Johnsons",
-    url: "the-johnsons",
-    type: "Home",
-    stars: 5,
-    price: "$$/hr"
-  },
-  {
-    img: "",
-    name: "Kindred Barn",
-    url: "kindred-barn",
-    type: "Barn",
-    stars: 4,
-    price: "$$$/hr"
-  },
-  {
-    img: "",
-    name: "Camille Walala",
-    url: "camille-walala",
-    type: "Mural",
-    stars: 5,
-    price: "FREE"
-  }
-];
-
 const App = () => {
   const [load, setLoad] = useState(true);
 
   const [info, setInfo] = useState(false);
 
-  const [scene, setScene] = useState(null);
+  const [app, setApp] = useState(true);
+
+  const dispatch = useDispatch();
 
   const toggle = () => {
     setInfo(false);
+    setApp(true);
   };
 
-  const searchScene = x => {
-    setScene(x);
-  };
-
-  const close = () => {
-    setScene(null);
-  };
+  const dark = useSelector(state => state.dark);
 
   useEffect(() => {
     let search = window.location.search.substring(1);
-    let filterdScenes = scenes.map(x => x.url);
-    if (filterdScenes.includes(search)) {
-      setScene(search);
+
+    if (data[search]) {
       setLoad(false);
+      setApp(true);
+      dispatch(scene(search));
     } else {
       setTimeout(() => {
-        setLoad(false);
-        setInfo(true);
+        // setLoad(false);
+        // setInfo(true);
       }, 1800);
     }
   }, []);
 
   return (
     <>
-      <GS />
-      {load && <Loading />}
+      <GS dark={dark} />
+      {/* {load && <Loading />} */}
 
-      {info && scene == null ? (
-        <Info toggle={toggle} />
-      ) : (
+      {/* {info && <Info toggle={toggle} />} */}
+
+      {app && (
         <BrowserRouter>
           <Route path="/profile" component={Profile} />
           <Route path="/saved" component={Saved} />
-          <Route
-            exact
-            path="/"
-            render={props => (
-              <Home
-                search={searchScene}
-                scene={scene}
-                scenes={scenes}
-                close={close}
-              />
-            )}
-          />
+          <Route exact path="/" component={Home} />
           <div className="spacer" />
           <Nav />
         </BrowserRouter>
@@ -151,4 +112,9 @@ const App = () => {
 };
 
 const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  rootElement
+);

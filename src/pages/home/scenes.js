@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { LazyLoad } from "../../functions/lazyLoad";
+import { useDispatch } from "react-redux";
+import { scene } from "../../redux/actions";
+
+import { data } from "../../data";
 
 const S = styled.div`
   .scene {
@@ -20,7 +24,7 @@ const S = styled.div`
     .img {
       background-color: grey;
       background-size: cover;
-      height: 200px;
+      height: 250px;
       border-radius: 30px;
       box-shadow: var(--shadow);
       width: 100%;
@@ -32,6 +36,7 @@ const S = styled.div`
     .price {
       box-shadow: var(--shadow);
       position: absolute;
+      color: var(--theme3);
       bottom: 120px;
       right: 20px;
       background: white;
@@ -65,7 +70,9 @@ const S = styled.div`
   }
 `;
 
-export const Scenes = ({ search, scenes }) => {
+export const Scenes = () => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     let targets = document.querySelectorAll(".scene");
     targets.forEach(LazyLoad);
@@ -73,26 +80,24 @@ export const Scenes = ({ search, scenes }) => {
 
   return (
     <S>
-      {[...Array(scenes.length)].map((x, i) => (
+      {Object.keys(data).map((x, i) => (
         <div className="scene" key={i}>
           <div
             className="img"
             style={{
-              backgroundImage: `url('https://res.cloudinary.com/baudelaire/image/upload/w_500/v1574746635/focus-scene/scenes/${
-                scenes[i].url
-              }.png')`
+              backgroundImage: `url('https://res.cloudinary.com/baudelaire/image/upload/w_500/v1574746634/focus-scene/scenes/${x}/1.png')`
             }}
             onClick={() => {
-              search(scenes[i].name);
+              dispatch(scene(x));
             }}
           />
-          <div className="price">{scenes[i].price}</div>
+          <div className="price">{data[x].price}</div>
           <div className="info">
-            <div className="name">{scenes[i].name}</div>
-            <div className="scene-type">{scenes[i].type}</div>
+            <div className="name">{data[x].name}</div>
+            <div className="scene-type">{data[x].type}</div>
 
             <div className="stars">
-              {[...Array(scenes[i].stars)].map((s, i) => (
+              {[...Array(data[x].stars)].map((s, i) => (
                 <i key={i} className="material-icons-round">
                   star
                 </i>
