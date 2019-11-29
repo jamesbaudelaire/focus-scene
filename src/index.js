@@ -65,7 +65,7 @@ const App = () => {
 
   const [info, setInfo] = useState(false);
 
-  const [app, setApp] = useState(true);
+  const [app, setApp] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -85,8 +85,8 @@ const App = () => {
       dispatch(scene(search));
     } else {
       setTimeout(() => {
-        // setLoad(false);
-        // setInfo(true);
+        setLoad(false);
+        setInfo(true);
       }, 1800);
     }
   }, []);
@@ -94,9 +94,9 @@ const App = () => {
   return (
     <>
       <GS dark={dark} />
-      {/* {load && <Loading />} */}
+      {load && <Loading />}
 
-      {/* {info && <Info toggle={toggle} />} */}
+      {info && <Info toggle={toggle} />}
 
       {app && (
         <BrowserRouter>
