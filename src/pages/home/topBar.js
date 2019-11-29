@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+import { useSelector } from "react-redux";
 
 const S = styled.div`
   height: 200px;
@@ -11,6 +13,14 @@ const S = styled.div`
     opacity: 0.7;
     display: block;
     margin: 20px auto;
+  }
+
+  .logo-title {
+    ${props =>
+      props.dark &&
+      css`
+        filter: invert();
+      `}
   }
 
   .socials {
@@ -41,13 +51,20 @@ let socials = [
 ];
 
 export const TopBar = () => {
+  const dark = useSelector(s => s.dark);
+
   return (
-    <S>
-      <img src="https://res.cloudinary.com/baudelaire/image/upload/v1574747476/focus-scene/logo-title.png" />
+    <S dark={dark}>
+      <img
+        className="logo-title"
+        alt="logo-title"
+        src="https://res.cloudinary.com/baudelaire/image/upload/v1574747476/focus-scene/logo-title.png"
+      />
       <div className="socials">
         {socials.map(x => (
-          <a href={x.link}>
+          <a href={x.link} key={x.social}>
             <img
+              alt={x.social}
               src={`https://res.cloudinary.com/baudelaire/image/upload/v1574748108/focus-scene/social/${
                 x.social
               }.png`}

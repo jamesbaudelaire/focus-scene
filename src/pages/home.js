@@ -6,15 +6,19 @@ import { TopBar } from "./home/topBar";
 
 import { FilterNav } from "./home/filterNav";
 
-export const Home = ({ search, scene, scenes, close }) => {
+import { useSelector } from "react-redux";
+
+export const Home = () => {
+  const s = useSelector(state => state.scene);
+
   return (
     <>
-      {!scene && <TopBar />}
-      {scene ? (
-        <Scene scene={scene} close={close} />
+      {s == null && <TopBar />}
+      {s ? (
+        <Scene />
       ) : (
         <>
-          <Scenes scenes={scenes} search={search} />
+          <Scenes />
           <FilterNav />
         </>
       )}

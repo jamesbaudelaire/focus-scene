@@ -9,7 +9,7 @@
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json" /> -->
     <link rel="shortcut icon" href="%PUBLIC_URL%/logo.png" />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
@@ -21,6 +21,21 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Focus Scene</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-138422331-5"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-138422331-5");
+    </script>
   </head>
 
   <body>

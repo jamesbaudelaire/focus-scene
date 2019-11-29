@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { close } from "redux/actions";
+import { data } from "data";
 
 const S = styled.div`
   background: var(--theme2);
@@ -37,20 +40,23 @@ const S = styled.div`
   }
 `;
 
-export const SceneNav = ({ close, scene }) => {
+export const SceneNav = () => {
   const [load, setLoad] = useState(false);
   useEffect(() => {
     setLoad(true);
   }, []);
 
+  const dispatch = useDispatch();
+  let s = useSelector(state => state.scene);
+
   const share = () => {
     if (navigator.share) {
       navigator.share({
         title: "Focus Scene",
-        url: `/?${scene}`
+        url: `/?${s}`
       });
     } else {
-      console.log(scene);
+      console.log(s);
     }
   };
 
@@ -64,7 +70,7 @@ export const SceneNav = ({ close, scene }) => {
     <S className={load ? "load" : undefined}>
       <div
         onClick={() => {
-          close(null);
+          dispatch(close());
         }}
       >
         <i className="material-icons-round back">arrow_back_ios</i>
