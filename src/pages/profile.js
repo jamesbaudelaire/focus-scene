@@ -10,53 +10,63 @@ const S = styled.div`
   }
 
   .user {
+    position: relative;
     margin: 20px;
-    img {
+    .user-img {
+      display: inline-block;
       border-radius: 50%;
       width: 80px;
+      overflow: hidden;
       height: 80px;
       box-shadow: var(--shadow);
-    }
-    .name {
-      font-weight: bold;
-      font-family: var(--font2);
-      padding: 0px 20px;
-      font-size: 25px;
-    }
-    .user-type {
-      border-radius: 30px;
-      text-transform: uppercase;
-      padding: 5px 10px;
-      color: white;
-      box-shadow: var(--shadow);
-      display: inline-block;
-      margin: 20px 10px 0 10px;
-      font-size: 15px;
+      img {
+        height: 100%;
+      }
     }
 
-    hr {
-      height: 3px;
-      border-radius: 30px;
-      width: 80%;
-      margin: 40px auto;
+    .name {
+      position: absolute;
     }
   }
 
+  .name {
+    font-weight: bold;
+    font-family: var(--font2);
+    padding: 0px 20px;
+    font-size: 25px;
+  }
+  .user-type {
+    border-radius: 30px;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    color: white;
+    box-shadow: var(--shadow);
+    display: inline-block;
+    margin: 20px 10px 0 10px;
+    font-size: 15px;
+  }
+
+  hr {
+    height: 3px;
+    border-radius: 30px;
+    width: calc(100% - 60px);
+    margin: 20px auto;
+  }
+
   .settings {
-    font-size: 20px;
-    margin: 30px;
+    font-size: 15px;
     hr {
       height: 3px;
       border-radius: 30px;
     }
     .setting {
       font-weight: bold;
-      margin: 30px 0;
+      margin: 20px;
       text-transform: uppercase;
       font-family: var(--font2);
     }
     .option {
-      margin: 20px 0px;
+      margin: 30px;
       font-family: var(--font1);
     }
   }
@@ -99,20 +109,14 @@ export const Profile = () => {
   return (
     <S dark={dark} className={load ? "load" : undefined}>
       <div className="user">
-        <img
-          alt="user"
-          className="user-img"
-          src="https://res.cloudinary.com/baudelaire/image/upload/v1574749092/focus-scene/user.png"
-        />
+        <div className="user-img">
+          <img
+            alt="user"
+            src="https://res.cloudinary.com/baudelaire/image/upload/w_200/v1575609803/focus-scene/profile.png"
+          />
+        </div>
         <span className="name">{user.name}</span>
         <br />
-        <span className="user-type" style={{ background: "var(--theme1)" }}>
-          {user.type}
-        </span>
-        <span className="user-type" style={{ background: "var(--theme2)" }}>
-          venue owner
-        </span>
-        <hr />
       </div>
 
       <div className="settings">

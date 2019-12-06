@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { LazyLoad } from "../../functions/lazyLoad";
 import { useDispatch } from "react-redux";
 import { scene } from "../../redux/actions";
-
+import { Stars } from "ui/stars";
 import { data } from "../../data";
 
 const S = styled.div`
@@ -24,7 +24,7 @@ const S = styled.div`
     .img {
       background-color: grey;
       background-size: cover;
-      height: 250px;
+      height: 200px;
       border-radius: 30px;
       box-shadow: var(--shadow);
       width: 100%;
@@ -96,20 +96,7 @@ export const Scenes = () => {
             <div className="name">{data[x].name}</div>
             <div className="scene-type">{data[x].type}</div>
 
-            <div className="stars">
-              {[...Array(data[x].stars)].map((s, i) => (
-                <i key={i} className="material-icons-round">
-                  star
-                </i>
-              ))}
-            </div>
-            <div className="five-stars">
-              {[...Array(5)].map((s, i) => (
-                <i key={i} className="material-icons-round">
-                  star
-                </i>
-              ))}
-            </div>
+            <Stars data={data[x]} />
           </div>
         </div>
       ))}

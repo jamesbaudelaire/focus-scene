@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import { LazyLoad } from "../../functions/lazyLoad";
+import { LazyLoad } from "functions/lazyLoad";
 
 const S = styled.div`
   opacity: 0;
@@ -15,7 +15,7 @@ const S = styled.div`
 
   .gallery {
     white-space: nowrap;
-    height: 300px;
+    height: 250px;
     overflow-x: scroll;
   }
 
@@ -24,6 +24,12 @@ const S = styled.div`
     margin: 20px;
     display: inline-block;
     height: calc(100% - 60px);
+
+    margin-right: 0px;
+    :last-child {
+      margin-right: 20px;
+    }
+
     opacity: 0.5;
     transition: 0.5s;
     transform: scale(0.9);
@@ -48,7 +54,7 @@ export const Gallery = ({ scene }) => {
 
   return (
     <S className={load ? "load" : undefined}>
-      <div className="gallery">
+      <div className="scrollbar gallery">
         {[...Array(3)].map((x, i) => (
           <img
             className="card"

@@ -3,6 +3,10 @@ import styled from "styled-components";
 
 import { LazyLoad } from "./functions/lazyLoad";
 
+import { useDispatch } from "react-redux";
+
+import { data } from "data";
+
 const S = styled.div`
   position: absolute;
   top: 0;
@@ -35,56 +39,66 @@ const S = styled.div`
     height: calc(100% - 40px);
 
     .card {
-      background-size: cover;
-      background-color: grey;
+      color: white;
+      background: black;
       border-radius: 30px;
-      color: grey;
       font-weight: bold;
       overflow: hidden;
       margin: 30px;
+      margin-left: -30px;
       display: inline-block;
-      margin-right: 0px;
+
       :last-child {
         margin-right: 30px;
       }
       height: calc(100% - 60px);
-      width: calc(100% - 70px);
+      width: calc(100% - 80px);
 
       opacity: 0.5;
       transition: 0.5s;
       transform: scale(0.9);
       &.io {
+        margin-left: 0px;
+        :first-child {
+          margin-left: 30px;
+        }
         opacity: 1;
         transform: scale(1);
         box-shadow: var(--shadow);
       }
     }
 
+    img {
+      height: 100%;
+      opacity: 0.5;
+    }
+
     .overlay {
-      background: white;
-      opacity: 0.8;
+      top: 0;
+      left: 0;
       height: 100%;
       border-radius: 30px;
       position: absolute;
       width: 100%;
+      box-sizing: border-box;
     }
 
     .title {
       font-weight: bold;
       text-transform: uppercase;
-      font-size: 7vw;
+      font-size: 24px;
+      width: calc(100% - 40px);
       white-space: pre-wrap;
       font-family: var(--font2);
       position: absolute;
       bottom: 50%;
-      padding: 40px;
-      height: 140px;
+      padding: 20px;
     }
 
     hr {
       height: 3px;
       border-radius: 30px;
-      width: 70%;
+      width: calc(100% - 40px);
       left: 0;
       right: 0;
       position: absolute;
@@ -92,16 +106,32 @@ const S = styled.div`
     }
 
     .text {
-      line-height: 25px;
-      font-size: 1rem;
+      padding: 20px;
+      line-height: 20px;
+      font-size: 12px;
+      width: calc(100% - 40px);
       white-space: pre-wrap;
       font-family: var(--font1);
       position: absolute;
       top: 50%;
-      padding: 40px;
     }
   }
 `;
+
+let cards = [
+  {
+    title: `Connect Venue Owners to Photographers.`,
+    text: `Focus Scene is a marketplace that provides a collection of unique, undiscovered locations for your next photoshoot.`
+  },
+  {
+    title: `MAKE ANY SPACE YOUR LOCATION SETTING FOR PHOTOSHOOTS.`,
+    text: `Become a verified venue owner on this app to lend your location for easy revenue, advertising, and networking.`
+  },
+  {
+    title: `END YOUR SEARCH BY BEGINNING HERE.`,
+    text: `Find attractive locations near you to shoot photography and personalize your favorites to easily share with others.`
+  }
+];
 
 export const Info = ({ toggle }) => {
   const [load, setLoad] = useState(false);
@@ -120,63 +150,22 @@ export const Info = ({ toggle }) => {
         close
       </i>
 
-      <div className="info">
-        <div
-          className="card"
-          style={{
-            backgroundImage: `url('https://source.unsplash.com/400x800/?scene,1')`
-          }}
-        >
-          <div className="overlay">
-            <div className="title">
-              Connect <div style={{ color: "var(--theme2)" }}>Venue Owners</div>
-              to <div style={{ color: "var(--theme1)" }}>Photographers.</div>
-            </div>
-            <hr />
-            <div className="text">
-              Focus Scene is a marketplace that provides a collection of unique,
-              undiscovered locations for your next photoshoot.
-            </div>
-          </div>
-        </div>
+      <div className="scrollbar info">
+        {cards.map((x, i) => (
+          <div className="card" key={i}>
+            <img
+              alt="background"
+              src={`https://res.cloudinary.com/baudelaire/image/upload/w_1000/v1575056621/focus-scene/intro/${i +
+                1}.jpg`}
+            />
 
-        <div
-          className="card"
-          style={{
-            backgroundImage: `url('https://source.unsplash.com/400x800/?scene,2')`
-          }}
-        >
-          <div className="overlay">
-            <div className="center">
-              <div className="title">
-                MAKE ANY SPACE YOUR LOCATION SETTING FOR PHOTOSHOOTS.
-              </div>
+            <div className="overlay">
+              <div className="title">{x.title}</div>
               <hr />
-              <div className="text">
-                Become a verified venue owner on this app to lend your location
-                for easy revenue, advertising, and networking.
-              </div>
+              <div className="text">{x.text}</div>
             </div>
           </div>
-        </div>
-
-        <div
-          className="card"
-          style={{
-            backgroundImage: `url('https://source.unsplash.com/400x800/?scene,3')`
-          }}
-        >
-          <div className="overlay">
-            <div className="center">
-              <div className="title">END YOUR SEARCH BY BEGINNING HERE.</div>
-              <hr />
-              <div className="text">
-                Find attractive locations near you to shoot photography and
-                personalize your favorites to easily share with others.{" "}
-              </div>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </S>
   );
