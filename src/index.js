@@ -26,7 +26,7 @@ const GS = createGlobalStyle`
 :root{
 --font1:'Montserrat';
 --font2:'Roboto';
---shadow:0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+--shadow:0 10px 6px -6px rgba(0,0,0,.5);
 --theme1: #eb008c;
 --theme2:#3f2367;
 --theme3:#5ec8d8;
@@ -49,6 +49,15 @@ body{
   user-select:none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
+.scrollbar {
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+}
+.scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 
 a{
   text-decoration:none;
@@ -87,7 +96,7 @@ const App = () => {
       setTimeout(() => {
         setLoad(false);
         setInfo(true);
-      }, 1800);
+      }, 1500);
     }
   }, []);
 

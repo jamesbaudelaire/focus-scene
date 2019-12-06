@@ -4,9 +4,8 @@ import styled, { css } from "styled-components";
 import { useSelector } from "react-redux";
 
 const S = styled.div`
-  height: 200px;
   padding: 30px;
-  padding-bottom: 0;
+  padding-bottom: 10px;
 
   img {
     width: 70%;
@@ -32,6 +31,10 @@ const S = styled.div`
       width: 50px;
     }
   }
+
+  .title {
+    font-size: 20px;
+  }
 `;
 
 let socials = [
@@ -55,7 +58,7 @@ export const TopBar = () => {
 
   return (
     <S dark={dark}>
-      <img
+      {/* <img
         className="logo-title"
         alt="logo-title"
         src="https://res.cloudinary.com/baudelaire/image/upload/v1574747476/focus-scene/logo-title.png"
@@ -71,8 +74,8 @@ export const TopBar = () => {
             />
           </a>
         ))}
-      </div>
-      Find locations near you.
+      </div> */}
+      <div className="title">Find locations near you.</div>
     </S>
   );
 };

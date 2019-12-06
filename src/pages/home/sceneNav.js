@@ -79,7 +79,16 @@ export const SceneNav = () => {
 
       <div
         onClick={() => {
-          console.log("l");
+          let address = data[s].location;
+          // if (
+          //   navigator.platform.indexOf("iPhone") != -1 ||
+          //   navigator.platform.indexOf("iPad") != -1 ||
+          //   navigator.platform.indexOf("iPod") != -1
+          // ) {
+          //   window.open("http://maps.apple.com/?q=" + address);
+          // } else {
+          window.open("https://maps.google.com/maps?q=" + address);
+          // }
         }}
       >
         <i className="material-icons save">location_on</i>
