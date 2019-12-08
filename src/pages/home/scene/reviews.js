@@ -5,9 +5,6 @@ import { Stars } from "ui/stars";
 const S = styled.div`
   margin: 20px;
   margin-top: 30px;
-  i {
-    font-size: 20px;
-  }
   .review {
     .user {
       border-radius: 50%;
@@ -21,10 +18,11 @@ const S = styled.div`
       line-height: 50px;
       margin: 0 20px;
       font-family: var(--font2);
-      font-size: 20px;
+      font-size: 18px;
     }
 
     .text {
+      font-size: 16px;
       margin: 10px 0 30px 0;
     }
   }

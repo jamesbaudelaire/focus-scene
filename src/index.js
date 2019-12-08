@@ -4,7 +4,7 @@ import { createGlobalStyle, css } from "styled-components";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Loading } from "./loading";
 import { Home } from "./pages/home";
-import { Saved } from "./pages/saved";
+import { Bookmarks } from "./pages/bookmarks";
 import { Profile } from "./pages/profile";
 import { Nav } from "./nav";
 import { Info } from "./info";
@@ -15,9 +15,15 @@ import { Provider } from "react-redux";
 
 import { Reducers } from "./redux/reducers";
 import { useSelector, useDispatch } from "react-redux";
-import { scene } from "./redux/actions";
+import { getScene } from "./redux/actions";
+
+import { LS } from "functions/LS";
 
 const store = createStore(Reducers);
+
+store.subscribe(() => {
+  LS.save(store.getState());
+});
 
 const GS = createGlobalStyle`
 @import url("https://fonts.googleapis.com/css?family=Montserrat|Roboto");
@@ -71,10 +77,12 @@ a{
 
 const App = () => {
   const [load, setLoad] = useState(true);
+  // const [load, setLoad] = useState(false);
 
   const [info, setInfo] = useState(false);
 
   const [app, setApp] = useState(false);
+  // const [app, setApp] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -91,7 +99,7 @@ const App = () => {
     if (data[search]) {
       setLoad(false);
       setApp(true);
-      dispatch(scene(search));
+      dispatch(getScene(search));
     } else {
       setTimeout(() => {
         setLoad(false);
@@ -110,7 +118,7 @@ const App = () => {
       {app && (
         <BrowserRouter>
           <Route path="/profile" component={Profile} />
-          <Route path="/saved" component={Saved} />
+          <Route path="/bookmarks" component={Bookmarks} />
           <Route exact path="/" component={Home} />
           <div className="spacer" />
           <Nav />

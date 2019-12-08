@@ -15,25 +15,22 @@ const S = styled.div`
     .user-img {
       display: inline-block;
       border-radius: 50%;
-      width: 80px;
+      width: 70px;
       overflow: hidden;
-      height: 80px;
+      height: 70px;
       box-shadow: var(--shadow);
       img {
         height: 100%;
       }
     }
-
-    .name {
-      position: absolute;
-    }
   }
 
   .name {
-    font-weight: bold;
     font-family: var(--font2);
     padding: 0px 20px;
-    font-size: 25px;
+    font-size: 20px;
+    line-height: 70px;
+    vertical-align: top;
   }
   .user-type {
     border-radius: 30px;
@@ -60,18 +57,19 @@ const S = styled.div`
       border-radius: 30px;
     }
     .setting {
-      font-weight: bold;
       margin: 20px;
+      font-size: 18px;
       text-transform: uppercase;
       font-family: var(--font2);
     }
     .option {
       margin: 30px;
+      font-size: 16px;
       font-family: var(--font1);
     }
   }
 
-  .dark-mode {
+  .dark-mode-button {
     font-size: 40px;
     color: ${props => (props.dark ? "white" : "black")};
     position: absolute;
@@ -90,7 +88,6 @@ let settings = {
   account: ["Personal information", "Payments & payouts", "Notifications"],
   hosting: ["Learn about hosting", "List your space"],
   "referrals & credits": ["Invite friends", "Refer a host"],
-  tools: ["Siri shortcuts"],
   support: ["Get help", "Give us feedback"],
   legal: ["Terms of service"],
   "log out": []
@@ -134,7 +131,7 @@ export const Profile = () => {
 
         <i
           onClick={() => dispatch({ type: "dark" })}
-          className="material-icons-round dark-mode"
+          className="material-icons-round dark-mode-button"
         >
           brightness_6
         </i>

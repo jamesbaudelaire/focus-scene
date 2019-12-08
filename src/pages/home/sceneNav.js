@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { close } from "redux/actions";
+import { exitScene, bookmarkScene } from "redux/actions";
 import { data } from "data";
 
 const S = styled.div`
   background: var(--theme2);
+
   z-index: 200;
   transition: 0.5s;
   transform: translatey(50px);
@@ -47,30 +48,26 @@ export const SceneNav = () => {
   }, []);
 
   const dispatch = useDispatch();
-  let s = useSelector(state => state.scene);
+
+  let scene = useSelector(state => state.scene);
+  let bookmarks = useSelector(state => state.bookmarks);
 
   const share = () => {
     if (navigator.share) {
       navigator.share({
         title: "Focus Scene",
-        url: `/?${s}`
+        url: `/?${scene}`
       });
     } else {
-      console.log(s);
+      console.log(scene);
     }
-  };
-
-  const [saved, setSaved] = useState(false);
-
-  const save = () => {
-    setSaved(!saved);
   };
 
   return (
     <S className={load ? "load" : undefined}>
       <div
         onClick={() => {
-          dispatch(close());
+          dispatch(exitScene());
         }}
       >
         <i className="material-icons-round back">arrow_back_ios</i>
@@ -79,16 +76,16 @@ export const SceneNav = () => {
 
       <div
         onClick={() => {
-          let address = data[s].location;
-          // if (
-          //   navigator.platform.indexOf("iPhone") != -1 ||
-          //   navigator.platform.indexOf("iPad") != -1 ||
-          //   navigator.platform.indexOf("iPod") != -1
-          // ) {
-          //   window.open("http://maps.apple.com/?q=" + address);
-          // } else {
-          window.open("https://maps.google.com/maps?q=" + address);
-          // }
+          let address = data[scene].location;
+          if (
+            navigator.platform.indexOf("iPhone") != -1 ||
+            navigator.platform.indexOf("iPad") != -1 ||
+            navigator.platform.indexOf("iPod") != -1
+          ) {
+            window.open("http://maps.apple.com/?q=" + address);
+          } else {
+            window.open("https://maps.google.com/maps?q=" + address);
+          }
         }}
       >
         <i className="material-icons save">location_on</i>
@@ -105,12 +102,14 @@ export const SceneNav = () => {
       </div>
       <div
         onClick={() => {
-          save();
+          dispatch(bookmarkScene(scene));
         }}
       >
         <i
           className="material-icons-round save"
-          style={{ color: saved ? "var(--theme1)" : "white" }}
+          style={{
+            color: bookmarks.includes(scene) ? "var(--theme1)" : "white"
+          }}
         >
           collections_bookmark
         </i>

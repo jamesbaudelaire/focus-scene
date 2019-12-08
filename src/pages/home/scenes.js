@@ -2,23 +2,20 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { LazyLoad } from "../../functions/lazyLoad";
 import { useDispatch } from "react-redux";
-import { scene } from "../../redux/actions";
-import { Stars } from "ui/stars";
+import { getScene } from "../../redux/actions";
+import { Info } from "ui/info";
 import { data } from "../../data";
 
 const S = styled.div`
   .scene {
-    i {
-      font-size: 20px;
-    }
     margin: 20px;
     width: calc(100% - 40px);
-    opacity: 0.5;
+    opacity: 0;
     transition: 0.5s;
-    transform: scale(0.8);
+    transform: translatey(30px);
     &.io {
       opacity: 1;
-      transform: scale(1);
+      transform: translatey(0);
     }
 
     .img {
@@ -33,54 +30,27 @@ const S = styled.div`
         transform: scale(0.9);
       }
     }
-    .price {
-      box-shadow: var(--shadow);
-      position: absolute;
-      color: var(--theme3);
-      bottom: 120px;
-      right: 20px;
-      background: white;
-      padding: 5px 10px;
-      border-radius: 30px;
-    }
-    .scene-type {
-      margin: 10px 0;
-      font-family: var(--font1);
-      font-style: italic;
-    }
-    .info {
-      position: relative;
-      bottom: 0;
-      margin: 20px;
-      width: 50%;
-    }
-    .five-stars {
-      position: absolute;
-      bottom: 0px;
-      z-index: -1;
-      color: black;
-    }
-    .stars {
-      color: var(--theme3);
-    }
-    .name {
-      margin: 5px 0;
-      font-family: var(--font2);
-    }
   }
 `;
 
-export const Scenes = () => {
+export const Scenes = ({ filterType }) => {
   const dispatch = useDispatch();
+
+  let scenes = Object.keys(data);
+
+  if (filterType) {
+    scenes = scenes.filter(x => data[x].type == filterType);
+  }
 
   useEffect(() => {
     let targets = document.querySelectorAll(".scene");
+
     targets.forEach(LazyLoad);
-  }, []);
+  });
 
   return (
     <S>
-      {Object.keys(data).map((x, i) => (
+      {scenes.map((x, i) => (
         <div className="scene" key={i}>
           <div
             className="img"
@@ -88,16 +58,10 @@ export const Scenes = () => {
               backgroundImage: `url('https://res.cloudinary.com/baudelaire/image/upload/w_500/v1574746634/focus-scene/scenes/${x}/1.png')`
             }}
             onClick={() => {
-              dispatch(scene(x));
+              dispatch(getScene(x));
             }}
           />
-          <div className="price">{data[x].price}</div>
-          <div className="info">
-            <div className="name">{data[x].name}</div>
-            <div className="scene-type">{data[x].type}</div>
-
-            <Stars data={data[x]} />
-          </div>
+          <Info data={data[x]} />
         </div>
       ))}
     </S>

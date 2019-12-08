@@ -5,9 +5,9 @@ LS.init();
 
 const sceneReducer = (state = null, action) => {
   switch (action.type) {
-    case "scene":
+    case "get":
       return (state = action.data);
-    case "close":
+    case "exit":
       return (state = null);
     default:
       return state;
@@ -17,8 +17,22 @@ const sceneReducer = (state = null, action) => {
 const darkReducer = (state = LS.data.dark, action) => {
   switch (action.type) {
     case "dark":
-      LS.save({ dark: !state });
       return !state;
+    default:
+      return state;
+  }
+};
+
+const bookmarksReducer = (state = LS.data.bookmarks, action) => {
+  switch (action.type) {
+    case "bookmark":
+      if (state.includes(action.data)) {
+        return state.filter(x => x !== action.data);
+      } else {
+        return [...state, action.data];
+      }
+    case "delete":
+      return state.filter(x => x !== action.data);
     default:
       return state;
   }
@@ -26,5 +40,6 @@ const darkReducer = (state = LS.data.dark, action) => {
 
 export const Reducers = combineReducers({
   scene: sceneReducer,
-  dark: darkReducer
+  dark: darkReducer,
+  bookmarks: bookmarksReducer
 });
