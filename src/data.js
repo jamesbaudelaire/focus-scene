@@ -1,7 +1,9 @@
 export const data = {
   "anne-marie-studio": {
+    url: "anne-marie-studio",
     name: "Anne Marie Studio",
-    type: "Studio",
+    owner: "Anne Marie",
+    type: "studio",
     stars: 5,
     price: "$$/hr",
     location: "523 Towson Ave",
@@ -24,8 +26,10 @@ export const data = {
   },
 
   "fort-smith-coffee-co": {
+    url: "fort-smith-coffee-co",
     name: "Fort Smith Coffee Co.",
-    type: "Business",
+    owner: "Katie Gould",
+    type: "business",
     location: "1101 Rogers Ave",
     stars: 4,
     contact: [
@@ -47,8 +51,10 @@ export const data = {
     Fort Smith, AR.  Our dream was birthed over a decade ago, but we started grassroots, by roasting coffee beans and selling in local venues.  We opened the doors to our first brick and mortar, in May 2017.  We roast all of our coffee on-site, employ skilled baristas and do pretty much everything from scratch - from our house made syrups, to our fresh assortment of pastries.  We create space for connection, community and relationships to thrive. We believe a lot can happen, over a good cup of coffee!`
   },
   "camille-walala": {
+    url: "camille-walala",
     name: "Camille Walala",
-    type: "Mural",
+    owner: "Unexpected",
+    type: "mural",
     location: "Grand Ave & N 11th St.",
     stars: 5,
     contact: [

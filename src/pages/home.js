@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { Scenes } from "./home/scenes";
 import { Scene } from "./home/scene";
@@ -9,17 +9,26 @@ import { FilterNav } from "./home/filterNav";
 import { useSelector } from "react-redux";
 
 export const Home = () => {
-  const s = useSelector(state => state.scene);
+  const scene = useSelector(state => state.scene);
+  const [filterType, setFilterType] = useState(null);
+
+  const filterScene = x => {
+    if (x == filterType) {
+      setFilterType(null);
+    } else {
+      setFilterType(x);
+    }
+  };
 
   return (
     <>
-      {s == null && <TopBar />}
-      {s ? (
+      {scene == null && <TopBar />}
+      {scene ? (
         <Scene />
       ) : (
         <>
-          <Scenes />
-          <FilterNav />
+          <Scenes filterType={filterType} />
+          <FilterNav filterScene={filterScene} />
         </>
       )}
     </>

@@ -50,7 +50,7 @@ let pages = [
   },
   {
     name: "bookmarks",
-    location: "/saved",
+    location: "/bookmarks",
     icon: "collections"
   },
   {

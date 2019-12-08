@@ -1,12 +1,26 @@
-export const scene = x => {
+export const getScene = x => {
   return {
-    type: "scene",
+    type: "get",
     data: x
   };
 };
 
-export const close = () => {
+export const exitScene = () => {
   return {
-    type: "close"
+    type: "exit"
+  };
+};
+
+export const bookmarkScene = x => {
+  return {
+    type: "bookmark",
+    data: x
+  };
+};
+
+export const deleteBookmark = x => {
+  return {
+    type: "delete",
+    data: x
   };
 };

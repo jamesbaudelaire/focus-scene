@@ -4,7 +4,6 @@ import styled from "styled-components";
 const S = styled.div`
   overflow-x: scroll;
   border-radius: 30px 30px 0 0;
-  z-index: 100;
   font-family: var(--font2);
   background: var(--theme2);
   position: fixed;
@@ -23,12 +22,15 @@ const S = styled.div`
 
   div {
     color: white;
-    margin: 9px 0 20px 30px;
+    margin: 9px 0 20px 10px;
     display: inline-block;
     font-size: 12px;
     text-transform: uppercase;
     border-radius: 30px;
     padding: 5px 10px;
+    :first-child {
+      margin-left: 30px;
+    }
     :last-child {
       margin-right: 30px;
     }
@@ -46,25 +48,33 @@ const S = styled.div`
 `;
 
 let types = [
-  "barn",
   "studio",
+  "mural",
+  "business",
+  "bar",
   "house",
   "garden",
-  "bar",
-  "cafe",
-  "club",
-  "loft",
-  "gym"
+  "patio",
+  "museum"
 ];
 
-export const FilterNav = () => {
+export const FilterNav = ({ filterScene }) => {
   const [load, setLoad] = useState(false);
 
-  const [type, setType] = useState();
+  const [type, setType] = useState(null);
 
   useEffect(() => {
     setLoad(true);
   }, []);
+
+  useEffect(() => {
+    if (type) {
+      document.querySelector(".selected").scrollIntoView({
+        behavior: "smooth",
+        inline: "center"
+      });
+    }
+  }, [type]);
 
   return (
     <S className={load ? "load" : undefined}>
@@ -73,7 +83,12 @@ export const FilterNav = () => {
           key={x}
           className={x == type ? "selected" : ""}
           onClick={() => {
-            setType(x);
+            if (x == type) {
+              setType(null);
+            } else {
+              setType(x);
+            }
+            filterScene(x);
           }}
         >
           {x}

@@ -3,6 +3,9 @@ import styled from "styled-components";
 
 const S = styled.div`
   position: relative;
+  i {
+    font-size: 18px;
+  }
   .five-stars {
     position: absolute;
     bottom: 0px;

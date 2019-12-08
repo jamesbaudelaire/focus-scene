@@ -3,10 +3,6 @@ import styled from "styled-components";
 
 import { LazyLoad } from "./functions/lazyLoad";
 
-import { useDispatch } from "react-redux";
-
-import { data } from "data";
-
 const S = styled.div`
   position: absolute;
   top: 0;
@@ -86,19 +82,19 @@ const S = styled.div`
     .title {
       font-weight: bold;
       text-transform: uppercase;
-      font-size: 24px;
-      width: calc(100% - 40px);
+      font-size: 25px;
+      width: calc(100% - 60px);
       white-space: pre-wrap;
       font-family: var(--font2);
       position: absolute;
       bottom: 50%;
-      padding: 20px;
+      padding: 20px 30px;
     }
 
     hr {
       height: 3px;
       border-radius: 30px;
-      width: calc(100% - 40px);
+      width: calc(100% - 60px);
       left: 0;
       right: 0;
       position: absolute;
@@ -106,10 +102,11 @@ const S = styled.div`
     }
 
     .text {
-      padding: 20px;
+      margin-top: 10px;
+      padding: 30px;
       line-height: 20px;
-      font-size: 12px;
-      width: calc(100% - 40px);
+      font-size: 15px;
+      width: calc(100% - 60px);
       white-space: pre-wrap;
       font-family: var(--font1);
       position: absolute;

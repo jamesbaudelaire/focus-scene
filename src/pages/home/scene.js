@@ -7,39 +7,22 @@ import styled from "styled-components";
 
 import { useSelector } from "react-redux";
 import { data } from "../../data";
+import { Info } from "ui/info";
+
+import { User } from "ui/user";
 
 const S = styled.div`
-  .scene-info {
+  font-size: 16px;
+  .details {
     position: relative;
     margin: 20px;
+    margin-top: 0;
   }
 
-  .scene-page {
-    font-family: var(--font2);
-    font-size: 25px;
-    width: calc(100% - 100px);
-  }
-  .scene-type {
-    font-style: italic;
-    font-family: var(--font2);
-    font-size: 20px;
-    margin: 10px 0px;
-  }
-
-  .scene-location {
-    margin: 20px;
-
-    i {
-      font-size: 30px;
-      color: red;
-    }
-  }
-
-  .about-title,
-  .contact-title {
+  .title {
     margin: 30px 0 10px 0;
-    font-weight: bold;
     font-family: var(--font2);
+    font-size: 18px;
   }
   .contact {
     .link {
@@ -57,18 +40,14 @@ const S = styled.div`
     }
   }
 
-  .owner {
-    img {
-      height: 100%;
+  .about {
+    .text {
+      margin: 20px;
     }
-    height: 70px;
-    overflow: hidden;
-    border-radius: 50%;
-    box-shadow: var(--shadow);
-    width: 70px;
-    position: absolute;
-    right: 0px;
-    top: 0;
+  }
+
+  .reviews {
+    margin: 20px;
   }
 `;
 
@@ -94,20 +73,12 @@ export const Scene = () => {
     <S className="scene-page">
       <Gallery scene={s} />
 
-      <div className="scene-info">
-        <div className="scene-page">{data[s].name}</div>
-
-        <div className="scene-type">{data[s].type}</div>
-
-        <div className="owner">
-          <img
-            alt="owner"
-            src={`https://res.cloudinary.com/baudelaire/image/upload/w_200/v1575604233/focus-scene/scenes/${s}/user.png`}
-          />
-        </div>
+      <div className="details">
+        <User data={data[s]} />
+        <Info data={data[s]} />
 
         <div className="contact">
-          <div className="contact-title">Contact</div>
+          <div className="title">Contact</div>
           {data[s].contact.map(x => (
             <div className="link" key={x.type}>
               <a
@@ -124,13 +95,15 @@ export const Scene = () => {
         </div>
 
         <div className="about">
-          <div className="about-title">About the location</div>
-          {data[s].about}
+          <div className="title">About the location</div>
+          <div className="text">{data[s].about}</div>
         </div>
       </div>
 
-      <Reviews scene={s} />
-
+      <div className="reviews">
+        <div className="title">Reviews</div>
+        <Reviews scene={s} />
+      </div>
       <SceneNav />
     </S>
   );
